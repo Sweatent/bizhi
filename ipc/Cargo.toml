@@ -1,0 +1,12 @@
+[package]
+name = "ipc"
+version = "0.1.0"
+edition = "2024"
+description = "Command channels and message payloads shared between Tauri and the wallpaper host."
+
+[dependencies]
+anyhow.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+common = { path = "../common" }
