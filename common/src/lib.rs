@@ -2,7 +2,7 @@
 //! This crate intentionally keeps runtime logic light to allow the host and UI
 //! processes to depend on a small, allocation-friendly surface area.
 
-use anyhow::{Result as AnyResult, anyhow};
+use anyhow::{anyhow, Result as AnyResult};
 use serde::{Deserialize, Serialize};
 use std::fmt;
 use std::str::FromStr;
