@@ -9,6 +9,9 @@ use std::fmt;
 use std::io::{self, Write};
 use std::path::PathBuf;
 use tracing::{error, info};
+use anyhow::Result;
+use common::{GpuPreference, RuntimeConfig};
+use tracing::info;
 use tracing_subscriber::EnvFilter;
 
 fn main() -> Result<()> {
@@ -25,6 +28,10 @@ fn main() -> Result<()> {
     info!("type 'help' for an overview of the available commands");
 
     run_cli(&mut state)
+    info!(?config, "wallpaper host bootstrap complete");
+
+    // Placeholder loop until the full Direct3D + Media Foundation pipeline is wired in.
+    Ok(())
 }
 
 fn init_tracing() {

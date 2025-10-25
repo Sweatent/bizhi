@@ -6,6 +6,7 @@ use anyhow::{anyhow, Result as AnyResult};
 use serde::{Deserialize, Serialize};
 use std::fmt;
 use std::str::FromStr;
+use serde::{Deserialize, Serialize};
 
 /// Video playback strategies supported by the wallpaper host.
 #[derive(Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]
