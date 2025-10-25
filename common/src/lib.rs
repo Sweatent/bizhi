@@ -2,6 +2,10 @@
 //! This crate intentionally keeps runtime logic light to allow the host and UI
 //! processes to depend on a small, allocation-friendly surface area.
 
+use anyhow::{anyhow, Result as AnyResult};
+use serde::{Deserialize, Serialize};
+use std::fmt;
+use std::str::FromStr;
 use serde::{Deserialize, Serialize};
 
 /// Video playback strategies supported by the wallpaper host.
@@ -19,6 +23,32 @@ pub enum VideoScalingMode {
 impl Default for VideoScalingMode {
     fn default() -> Self {
         Self::Cover
+    }
+}
+
+impl fmt::Display for VideoScalingMode {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let label = match self {
+            Self::Stretch => "stretch",
+            Self::Cover => "cover",
+            Self::Contain => "contain",
+        };
+        f.write_str(label)
+    }
+}
+
+impl FromStr for VideoScalingMode {
+    type Err = anyhow::Error;
+
+    fn from_str(s: &str) -> AnyResult<Self> {
+        match s.trim().to_ascii_lowercase().as_str() {
+            "stretch" => Ok(Self::Stretch),
+            "cover" => Ok(Self::Cover),
+            "contain" => Ok(Self::Contain),
+            other => Err(anyhow!(
+                "unknown scaling mode '{other}'. expected stretch, cover, or contain"
+            )),
+        }
     }
 }
 
